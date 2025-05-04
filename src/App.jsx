@@ -8,7 +8,7 @@ import SignIn from './pages/auth/signIn';
 import ResetPassword from './pages/auth/resetPassword';
 
 // SignIn pages
-import Main from './pages/dashboard/main';
+import ResponsiveDrawer from './pages/dashboard/main';
 
 import { PAGES } from './constants/pages';
 
@@ -28,12 +28,12 @@ function App() {
     <Wrapper>
       <Routes>
         <Route path={PAGES.SIGN_IN} element={<SignIn />} />
-        <Route path={PAGES.RESET_PASSWORD} element={<ResetPassword />} />
+        {/* <Route path={PAGES.RESET_PASSWORD} element={<ResetPassword />} /> */}
         <Route
           path={PAGES.MAIN}
           element={
             <ProtectedRoute>
-              <Main />
+              <ResponsiveDrawer />
             </ProtectedRoute>
           }
         />

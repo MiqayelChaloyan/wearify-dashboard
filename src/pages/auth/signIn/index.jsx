@@ -102,9 +102,9 @@ const SignIn = () => {
           />
           <Button variant="contained" type="submit" className="login-button">LOG IN</Button>
         </Box>
-        <div className="login-links">
+        {/* <div className="login-links">
           <Link to={PAGES.RESET_PASSWORD}>Forgot password?</Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 
 // Material-UI components
 import {
@@ -20,7 +22,7 @@ import {
 } from '@mui/icons-material';
 
 import DrawerContent, { pages } from './DrawerContent';
-import { useNavigate } from 'react-router-dom';
+
 import { PAGES } from '../../../constants/pages';
 
 

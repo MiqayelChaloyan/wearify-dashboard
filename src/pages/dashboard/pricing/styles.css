@@ -1,0 +1,11 @@
+.container {
+    height: 87vh;
+    background-image: url('../../../assets/svg/bg-grid.svg'), url('../../../assets/svg/download.svg');
+    background-position: center, center;
+    background-repeat: repeat, no-repeat;
+    background-size: auto, cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

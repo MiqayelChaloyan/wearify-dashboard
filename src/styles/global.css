@@ -7,6 +7,6 @@
 body,
 html {
     height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: Avenir, Arial !important;
     background-color: #f0f4f8;
 }

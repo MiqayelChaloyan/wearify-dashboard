@@ -10,6 +10,7 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
+  Divider,
 } from '@mui/material';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -330,7 +331,7 @@ const Chart = ({ chartData }) => {
         </Box>
       </LocalizationProvider>
 
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}></Box>
+      <Divider />
 
       <BarChart
         dataset={chartDataset.labels.map((label, index) => ({

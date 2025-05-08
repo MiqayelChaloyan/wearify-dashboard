@@ -5,7 +5,6 @@ import ProtectedRoute from './layout';
 
 // Auth pages
 import SignIn from './pages/auth/signIn';
-import ResetPassword from './pages/auth/resetPassword';
 
 // SignIn pages
 import ResponsiveDrawer from './pages/dashboard/main';

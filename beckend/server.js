@@ -41,7 +41,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-
 // Login Route
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;

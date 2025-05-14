@@ -47,7 +47,7 @@ const ResetPassword = () => {
         if (res.status === 200) {
           // dispatch(fetchStatistikaSuccess(res.data.user.data));
           // setIsAuthenticated(true);
-          navigate(PAGES.VERIFY_CODE);
+          navigate(PAGES.VERIFY_CODE, { state: { email } });
         } else {
           // setIsAuthenticated(false);
           setError('Failed to send verification code');

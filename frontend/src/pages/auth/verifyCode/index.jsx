@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
     Box,
     Button,
@@ -18,15 +18,18 @@ const VerifyCode = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const { email: locationEmail } = location.state || {};
 
     const [formData, setFormData] = useState({
-        email: '',
-        code: '',
+      email: locationEmail,
+      code: '',
     });
-
+  
     const [errors, setErrors] = useState({
-        email: '',
-        code: '',
+      email: '',
+      code: '',
     });
 
     const handleChange = (e) => {

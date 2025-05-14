@@ -1,0 +1,33 @@
+.new-password-container {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../../assets/svg/login-gradient.svg');
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.new-password-card {
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 10px;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.new-password-subtitle {
+    font-size: 1.80rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-align: center;
+    color: #1f2937;
+    font-family: 'Avenir', Arial, sans-serif;
+    letter-spacing: 0.5px;
+}

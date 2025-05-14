@@ -5,6 +5,7 @@ const { getDatabase, ref, update, get } = require('firebase/database');
 const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const crypto = require('crypto');
 
@@ -105,8 +106,41 @@ app.post('/login', async (req, res) => {
 
     const userData = userSnapshot.val();
 
+    //Token
+    // Create JWT token payload
+    const payload = {
+      uid: user.uid,
+      email: user.email,
+      role: 'user'
+    };
+
+    // Generate JWT token
+    const token = jwt.sign(
+      payload,
+      process.env.JWT_SECRET, // Store this in your environment variables
+      { expiresIn: '4h' } // Token expires in 4 hour
+    );
+
+
+    const clientId = Object.keys(users).find(id => users[id].email === email);
+
+        if (!clientId) {
+      return res.status(404).json({
+        error: 'User not found',
+        details: 'No account exists with this email address'
+      });
+    }
+
+    console.log(clientId, 'clientId')
+
+    await update(ref(database, `clients/${clientId}`), {
+      token,
+    });
+
+
     res.status(200).json({
       message: 'Login successful',
+      token,
       user: {
         uid: user.uid,
         email: user.email,
@@ -302,6 +336,66 @@ app.post('/set-new-password', async (req, res) => {
     });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1] || req.cookies.token;
+  if (!token) {
+    return res.status(401).json({ error: 'No token provided' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    console.error('Token verification failed:', err);
+    return res.status(401).json({ error: 'Invalid or expired token' });
+  }
+};
+
+// Add this route to verify token and get user data
+app.get('/verify-token', verifyToken, async (req, res) => {
+  try {
+    const { uid, email } = req.user;
+    const userDataRef = ref(database, uid);
+    const userSnapshot = await get(userDataRef);
+
+    const userData = userSnapshot.val();
+
+    if (!userSnapshot.exists()) {
+      return res.status(404).json({ 
+        error: 'User not found',
+        details: `No data at path: ${uid}`
+      });
+    }
+
+    res.status(200).json({
+      user: {
+        uid,
+        email,
+        data: { ...userData }
+      }
+    });
+  } catch (error) {
+    console.error('Token verification error:', error);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

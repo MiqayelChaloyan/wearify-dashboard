@@ -5,8 +5,9 @@ const endpoints = {
   ressetPassword: `${BASE_URL}/send-verification`,
   verifyCode: `${BASE_URL}/verify-code`,
   setNewPassword: `${BASE_URL}/set-new-password`,
+  verifyToken: `${BASE_URL}/verify-token`,
 };
 
 export {
-    endpoints
+  endpoints
 }

@@ -18,7 +18,7 @@ import "./styles.css";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const { setIsAuthenticated } = useAuth();
+  const { setIsAuthenticated, login } = useAuth();
 
 
   const [formData, setFormData] = useState({
@@ -87,10 +87,11 @@ const SignIn = () => {
           }
         );
 
+    const { token, user } = res.data;
 
         if (res.status === 200) {
-          dispatch(fetchStatistikaSuccess(res.data.user.data));
-          setIsAuthenticated(true);
+          dispatch(fetchStatistikaSuccess(user.data));
+          login(token)
           navigate(PAGES.MAIN);
         } else {
           setIsAuthenticated(false);

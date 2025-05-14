@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
-
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 // Material-UI components
 import {
@@ -23,39 +21,20 @@ import {
 
 import DrawerContent, { pages } from './DrawerContent';
 
-import { PAGES } from '../../../constants/pages';
 import { useAuth } from '../../../hooks/useAuth';
 
 
-function stringToColor(string) {
-    let hash = 0;
-    let i;
-
-    for (i = 0; i < string.length; i += 1) {
-        hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-
-    let color = '#';
-
-    for (i = 0; i < 3; i += 1) {
-        const value = (hash >> (i * 8)) & 0xff;
-        color += `00${value.toString(16)}`.slice(-2);
-    }
-
-    return color;
-}
 
 
 const drawerWidth = 240;
 
 const ResponsiveDrawer = (props) => {
     const { window } = props;
-    const navigate = useNavigate();
 
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const [currentPage, setCurrentPage] = useState(pages[0]);
-    const { signOut } = useAuth();
+    const { logout } = useAuth();
 
     // Avatar menu state
     const [anchorEl, setAnchorEl] = useState(null);
@@ -72,10 +51,7 @@ const ResponsiveDrawer = (props) => {
 
     const handleSignOut = () => {
         handleMenuClose();
-        signOut(); 
-        console.log('Signing out...');
-        navigate(PAGES.SIGN_IN);
-        // TODO: Add your sign-out logic here
+        logout(); 
     };
 
     const handleDrawerClose = () => {
